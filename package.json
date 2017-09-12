@@ -1,0 +1,60 @@
+{
+  "name": "md-theme-editor",
+  "version": "1.0.0",
+  "author": "dead-beef",
+  "license": "MIT",
+  "private": true,
+  "description": "Material design theme editor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dead-beef/md-theme-editor"
+  },
+  "main": "",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "tinycolor2": "^1.4.1",
+    "roboto-fontface": "^0.8.0",
+    "material-design-icons-iconfont": "^3.0.3",
+    "angular": "^1.6.5",
+    "@uirouter/angularjs": "^1.0.5",
+    "angular-animate": "^1.6.5",
+    "angular-aria": "^1.6.5",
+    "angular-combine": "^0.1.5",
+    "angular-cookies": "^1.6.5",
+    "angular-clipboard": "^1.6.1",
+    "angular-material": "^1.1.4",
+    "angular-messages": "^1.6.6",
+    "angular-translate": "^2.15.2",
+    "angular-translate-loader-static-files": "^2.15.2",
+    "angular-translate-storage-cookie": "^2.15.2",
+    "angular-translate-storage-local": "^2.15.2",
+    "ngstorage": "^0.3.11"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.6.5",
+    "chokidar-cli": "^1.2.0",
+    "csso-cli": "^1.0.0",
+    "eslint": "^4.2.0",
+    "glob": "^7.1.2",
+    "html-minifier": "^3.5.3",
+    "http-server": "^0.10.0",
+    "jasmine-core": "^2.6.4",
+    "jasmine-jquery": "^2.1.1",
+    "jasmine-spec-reporter": "^4.1.1",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-spec-reporter": "0.0.31",
+    "node-sass": "^4.5.3",
+    "packpath": "^0.1.0",
+    "protractor": "^5.1.2",
+    "root-require": "^0.3.1",
+    "uglify-js": "^3.0.25"
+  },
+  "scripts": {
+    "postinstall": "npm run update:webdriver",
+    "lint": "eslint src tests",
+    "update:webdriver": "webdriver-manager update"
+  }
+}

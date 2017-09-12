@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if ! pgrep -f http-server >/dev/null 2>&1; then
+	echo 'Starting http-server'
+	make start >/dev/null 2>&1 &
+fi
+
+user_firefox="$(pgrep firefox)"
+
+protractor config/protractor.conf.js
+
+firefox="$(pgrep firefox | fgrep -v "$user_firefox")"
+
+if [ -n "$firefox" ]; then
+	kill "$firefox"
+	pkill geckodriver
+	sleep 1
+	if [ -n "$TMPDIR" ]; then
+		rm -rf "$TMPDIR"/*mozprofile* "$TMPDIR"/GeckoChildCrash* 
+	fi
+fi
+
+exit 0

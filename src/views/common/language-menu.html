@@ -1,0 +1,13 @@
+<md-menu width="2">
+	<md-button class="md-icon-button" ng-click="$mdMenu.open($event)">
+		<md-icon md-menu-origin>language</md-icon>
+	</md-button>
+	<md-menu-content>
+		<md-menu-item ng-repeat="lang in vm.languages">
+			<md-button ng-class="{ 'md-accent': vm.language === lang }"
+			           ng-click="vm.language = lang">
+				{{ lang }}
+			</md-button>
+		</md-menu-item>
+	</md-menu-content>
+</md-menu>

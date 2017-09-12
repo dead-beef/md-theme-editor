@@ -1,0 +1,13 @@
+<md-toolbar hide-gt-sm>
+	<div class="md-toolbar-tools">
+		<h1 flex md-truncate layout="row" layout-align="center">
+			{{ stateData.pageTitle | translate }}
+		</h1>
+		<md-button class="md-icon-button"
+		           ng-controller="SideNavController as sidenav"
+		           ng-click="sidenav.toggle()"
+		           hide-gt-sm>
+			<md-icon>menu</md-icon>
+		</md-button>
+	</div>
+</md-toolbar>

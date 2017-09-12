@@ -1,0 +1,29 @@
+<md-dialog class="fullscreen-dialog" md-theme="{{ dialog.theme }}">
+	<md-dialog-content flex layout="column">
+		<div class="md-dialog-content" flex layout="column">
+			<md-tabs md-selected="dialog.selected" md-border-bottom flex="100">
+				<md-tab ng-repeat="fmt in ::dialog.EXPORT_FORMATS">
+					<md-tab-label>{{ 'export.format.' + fmt | translate }}</md-tab-label>
+					<md-tab-body>
+						<md-content layout-fill>
+							<pre class="md-padding"><code>{{ ::dialog[fmt] }}</code></pre>
+						</md-content>
+					</md-tab-body>
+				</md-tab>
+			</md-tabs>
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button layout-fill clipboard supported="supported"
+		           text="dialog[dialog.EXPORT_FORMATS[dialog.selected]]"
+		           on-copied="dialog.copySuccess()"
+		           on-error="dialog.copyError(err)">
+			<md-icon class="md-padding">save</md-icon>
+			<span>{{ 'action.copy' | translate }}</span>
+		</md-button>
+		<md-button layout-fill ng-click="dialog.close()">
+			<md-icon class="md-padding">close</md-icon>
+			<span>{{ 'action.close' | translate }}</span>
+		</md-button>
+	</md-dialog-actions>
+</md-dialog>

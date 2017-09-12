@@ -1,0 +1,8 @@
+<md-input-container>
+	<label>{{ name }}</label>
+	<md-select ng-model="ngModel">
+		<md-option ng-repeat="color in options" ng-value="color">
+			{{ ::color }}
+		</md-option>
+	</md-select>
+</md-input-container>

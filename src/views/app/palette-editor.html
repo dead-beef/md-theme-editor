@@ -1,0 +1,27 @@
+<md-card>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<md-button class="md-icon-button" ng-click="ctrl.rename()">
+				<md-icon>edit</md-icon>
+			</md-button>
+			<h3 flex>
+				{{ name }}
+			</h3>
+			<md-button class="md-icon-button" ng-click="ctrl.remove()">
+				<md-icon>close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<div layout="column">
+		<input-color flex ng-model="ctrl.palette.base"
+		             ng-change="ctrl.reset()" instant-update="instantUpdate">
+			{{ 'color.base' | translate }}
+		</input-color>
+		<input-color flex ng-repeat="value in ::ctrl.COLOR_VALUES"
+		             ng-model="ctrl.palette[value].hex"
+		             ng-change="ctrl.update(value)"
+		             instant-update="instantUpdate">
+			{{ value }}
+		</input-color>
+	</div>
+</md-card>

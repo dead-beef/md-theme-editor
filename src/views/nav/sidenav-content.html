@@ -1,0 +1,34 @@
+<md-list>
+	<md-list-item ui-sref="main" ui-sref-active="active">
+		<md-icon>edit</md-icon>
+		<p>{{ 'action.edit' | translate }}</p>
+	</md-list-item>
+	<md-list-item ng-click="sidenav.reset()">
+		<md-icon>format_color_reset</md-icon>
+		<p>{{ 'action.reset' | translate }}</p>
+	</md-list-item>
+	<md-subheader>
+		{{ 'action.export' | translate }}
+	</md-subheader>
+	<md-list-item ng-repeat="fmt in ::sidenav.EXPORT_FORMATS"
+	              ng-click="sidenav.exportData($index)">
+		<md-icon>file_download</md-icon>
+		<p>{{ 'export.format.' + fmt | translate }}</p>
+	</md-list-item>
+	<md-subheader>
+		{{ 'action.demo' | translate }}
+	</md-subheader>
+	<md-list-item ng-repeat="fmt in ::sidenav.EXPORT_FORMATS"
+	              ui-sref="demo.{{ ::fmt }}" ui-sref-active="active">
+		<md-icon>view_compact</md-icon>
+		<p>{{ 'export.format.' + fmt | translate }}</p>
+	</md-list-item>
+	<md-subheader>
+		{{ 'settings' | translate }}
+	</md-subheader>
+	<md-list-item>
+		<md-switch ng-model="settings.instantUpdate">
+			{{ 'settings.instant-update' | translate }}
+		</md-switch>
+	</md-list-item>
+</md-list>

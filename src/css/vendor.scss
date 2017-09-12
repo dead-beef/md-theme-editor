@@ -1,0 +1,6 @@
+$material-design-icons-font-path: '../fonts/material-icons/';
+$roboto-font-path: '../fonts';
+
+@import "material-design-icons-iconfont/dist/material-design-icons.scss";
+@import "roboto-fontface/css/roboto/sass/roboto-fontface.scss";
+@import "angular-material/angular-material.scss";

@@ -1,0 +1,12 @@
+<div layout="column" layout-padding layout-fill
+     ng-controller="DemoController as demo">
+	<div class="layout-overlay" md-whiteframe="4" flex>
+		<div class="overlay-top"
+		     layout="column" layout-align="center center"
+		     ng-if="demo.loading">
+			<md-progress-circular md-diameter="96"></md-progress-circular>
+		</div>
+		<div class="overlay-bottom" layout="column" ng-show="demo.show" ui-view>
+		</div>
+	</div>
+</div>

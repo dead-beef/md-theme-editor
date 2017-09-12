@@ -1,0 +1,34 @@
+<div class="md-margin" layout="row" layout-wrap
+     ng-controller="MainController as ctrl">
+	<md-card flex="100">
+		<md-card-content layout="row" layout-align="center center"
+		                 layout-padding layout-wrap>
+			<div flex="100" flex-gt-sm="20" layout>
+				<md-switch ng-model="ctrl.theme.dark" flex>
+					{{ 'palette.dark' | translate }}
+				</md-switch>
+			</div>
+			<div flex="50" flex-gt-sm="20" layout
+			     ng-repeat="palette in ::ctrl.THEME_PALETTES">
+				<palette-select flex md-colors="{background: '{{ palette }}'}"
+				                name="'palette.' + palette | translate"
+				                ng-model="ctrl.theme[palette]"
+				                options="ctrl.palettes">
+				</palette-select>
+			</div>
+		</md-card-content>
+	</md-card>
+
+	<div ng-repeat="(name, _) in ctrl.customPalettes"
+	     flex="100" flex-sm="50" flex-md="33" flex-gt-md="33" class="fold-animation">
+		<palette-editor name="name" instant-update="settings.instantUpdate">
+		</palette-editor>
+	</div>
+
+	<div flex="100" flex-sm="50" flex-md="33" flex-gt-md="33"
+	     layout="column" layout-align="center center">
+		<md-button class="md-fab" ng-click="ctrl.addPalette()">
+			<md-icon>add</md-icon>
+		</md-button>
+	</div>
+</div>

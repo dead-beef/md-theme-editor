@@ -1,0 +1,25 @@
+<md-dialog md-theme="{{ dialog.theme }}">
+		<md-dialog-content>
+			<div class="md-dialog-content" layout="column">
+				<h2 flex>
+					{{ 'action.rename.palette' | translate }}&nbsp;"{{ dialog.name }}"
+				</h2>
+				<md-input-container flex>
+					<label>{{ 'action.rename.label' | translate }}</label>
+					<input ng-model="dialog.result" md-autofocus>
+				</md-input-container>
+			</div>
+		</md-dialog-content>
+
+		<md-dialog-actions layout="row">
+			<md-button layout-fill ng-click="dialog.cancel()">
+				{{ 'action.cancel' | translate }}
+			</md-button>
+			<md-button layout-fill
+			           ng-click="dialog.ok()"
+			           ng-disabled="dialog.valid()">
+				{{ 'action.ok' | translate }}
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

@@ -1,0 +1,9 @@
+<h1 layout="column" layout-padding layout-align="center center" hide show-gt-sm
+    ng-if="stateData">
+	<div  class="md-headline" ng-if="stateData.pageTitle">
+		{{ stateData.pageTitle | translate }}
+	</div>
+	<div class="md-subhead" ng-if="stateData.pageLead">
+		{{ stateData.pageLead | translate }}
+	</div>
+</h1>

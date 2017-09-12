@@ -1,0 +1,13 @@
+<md-input-container>
+	<label layout="row" layout-align="center center">
+		<md-icon>language</md-icon>
+		<div flex>
+			<span layout-padding>{{ 'settings.language' | translate }}</span>
+		</div>
+	</label>
+	<md-select ng-model="vm.language">
+		<md-option ng-repeat="lang in vm.languages" ng-value="lang">
+			{{ lang }}
+		</md-option>
+	</md-select>
+</md-input-container>

@@ -1,0 +1,66 @@
+$tabSize: 4;
+$fullscreenDialogSize: 80%;
+
+md-menu-content {
+	overflow-x: hidden;
+}
+
+code {
+	tab-size: $tabSize;
+	-moz-tab-size: $tabSize;
+	-o-tab-size: $tabSize;
+	-webkit-tab-size: $tabSize;
+}
+
+iframe {
+	border: 0;
+}
+
+md-dialog.fullscreen-dialog {
+	height: $fullscreenDialogSize;
+	width: $fullscreenDialogSize;
+	min-height: $fullscreenDialogSize;
+	min-width: $fullscreenDialogSize;
+	max-height: $fullscreenDialogSize;
+	max-width: $fullscreenDialogSize;
+}
+
+.text-justify {
+	text-align: justify;
+	text-justify: inter-word;
+}
+
+.color {
+	border: 0; /*1px solid;*/
+	border-radius: 50%;
+}
+
+.fade-animation {
+    opacity: 1;
+	transition: 0.3s;
+	&.ng-enter {
+		opacity: 0;
+		&.ng-enter-active {
+			opacity: 1;
+		}
+	}
+	&.ng-leave {
+		opacity: 1;
+		&.ng-leave-active {
+			opacity: 0;
+		}
+	}
+}
+
+.layout-overlay {
+	position: relative;
+	& > * {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+	& > .overlay-bottom { z-index: 0; }
+	& > .overlay-top { z-index: 32; }
+}
