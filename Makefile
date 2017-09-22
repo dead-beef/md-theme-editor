@@ -135,20 +135,22 @@ BUILD_COPY_CSS := $(COPY_CSS_FILES:$(APP_DIR)%=$(BUILD_DIR)%)
 BUILD_COPY_HTML := $(COPY_HTML_FILES:$(APP_DIR)%=$(BUILD_DIR)%)
 BUILD_COPY_DIST := $(BUILD_COPY_JS) $(BUILD_COPY_CSS) $(BUILD_COPY_HTML)
 BUILD_COPY_DIST_MIN := $(BUILD_COPY_DIST:$(BUILD_DIR)%=$(MIN_DIR)%)
-BUILD_COPY_ALL := $(BUILD_FONTS) $(BUILD_COPY) $(BUILD_COPY_DIST)
+BUILD_COPY_ALL := $(BUILD_FONTS) $(BUILD_COPY) $(BUILD_DEMO_COPY) $(BUILD_COPY_DIST)
 
-BUILD_FILES := $(BUILD_COPY_DIST)
+BUILD_DEMO_MIN := $(BUILD_DEMO:$(BUILD_DIR)%=$(MIN_DIR)%)
+
+BUILD_FILES := $(BUILD_COPY_DIST) $(BUILD_DEMO)
 ifneq "$(strip $(LIBRARY))" ""
 BUILD_FILES += $(APP_JS) $(APP_CSS) $(APP_HTML)
 else
 BUILD_FILES += $(LIB_JS) $(LIB_CSS) $(APP_JS) $(APP_CSS) $(APP_HTML)
 endif
 BUILD_FILES_MIN := $(BUILD_FILES:$(BUILD_DIR)%=$(MIN_DIR)%)
-DIST_FILES:= $(BUILD_FILES:$(BUILD_DIR)%=$(DIST_DIR)%)
+DIST_FILES := $(BUILD_FILES:$(BUILD_DIR)%=$(DIST_DIR)%)
 
 WATCH_FILES := '$(APP_DIR)/**/*' 'config/*' Makefile package.json
 
-APP_OUT_DIRS := $(BUILD_DIR) $(DIST_DIR) $(MIN_DIR) $(BUILD_TMPL_DIR)
+APP_OUT_DIRS += $(BUILD_DIR) $(DIST_DIR) $(MIN_DIR) $(BUILD_TMPL_DIR)
 APP_OUT_DIRS += \
   $(foreach d,$(BUILD_COPY_DIST),\
     $(dir $d) \
@@ -217,6 +219,11 @@ ifneq "$(strip $(BUILD_COPY_DIST))" ""
 	  $(foreach f,$(BUILD_COPY_DIST),\
 	    $(CPDIST) $f $(DIST_DIR)/$(dir $(f:$(BUILD_DIR)/%=%)) &&) true)
 endif
+ifneq "$(strip $(BUILD_DEMO))" ""
+	$(call prefix,[dist]     ,\
+	  $(foreach f,$(BUILD_DEMO),\
+	    $(CPDIST) $f $(DIST_DIR)/$(dir $(f:$(BUILD_DIR)/%=%)) &&) true)
+endif
 
 min: $(BUILD_FILES_MIN)
 ifneq "$(strip $(APP_MIN_JS) $(LIB_MIN_JS))" ""
@@ -236,6 +243,11 @@ endif
 ifneq "$(strip $(BUILD_COPY_DIST_MIN))" ""
 	$(call prefix,[dist]     ,\
 	  $(foreach f,$(BUILD_COPY_DIST_MIN),\
+	    $(CPDIST) $f $(DIST_DIR)/$(dir $(f:$(MIN_DIR)/%=%)) &&) true)
+endif
+ifneq "$(strip $(BUILD_DEMO_MIN))" ""
+	$(call prefix,[dist]     ,\
+	  $(foreach f,$(BUILD_DEMO_MIN),\
 	    $(CPDIST) $f $(DIST_DIR)/$(dir $(f:$(MIN_DIR)/%=%)) &&) true)
 endif
 

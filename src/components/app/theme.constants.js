@@ -10,5 +10,5 @@ app
 	)
 	.constant(
 		'EXPORT_FORMATS',
-		[ 'ng1'/*, 'materialize'*/ ]
+		[ 'ng1', 'materialize' ]
 	);

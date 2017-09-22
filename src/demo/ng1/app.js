@@ -17,21 +17,9 @@
 		factory(root.angular);
 	}
 })(this, function(angular) {
-	var args = {
-		theme: ''
-	};
-
-	window.location.search.split(/[?&]/)
-		.forEach(function(arg) {
-			arg = arg.split('=');
-			if(arg.length === 2) {
-				args[arg[0]] = decodeURIComponent(arg[1]);
-			}
-		});
-
 	var app = angular.module('ng1Demo', ['ngMaterial', 'ngMessages']);
 
-	eval(args.theme);
+	eval(window.args.theme);
 
 	app.controller('Ng1DemoController', [
 		'$scope', '$mdDialog', '$mdSidenav', '$mdToast',

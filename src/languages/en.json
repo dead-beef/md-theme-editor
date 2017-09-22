@@ -6,10 +6,10 @@
 	"export.title":               "Export",
 	"export.brief":               "",
 
-	"export.format.ng1":          "Angular 1",
+	"export.format.ng1":          "AngularJS Material",
 	"export.format.materialize":  "MaterializeCSS",
 
-	"demo.ng1.title":             "Angular 1 demo",
+	"demo.ng1.title":             "AngularJS Material demo",
 	"demo.materialize.title":     "MaterializeCSS demo",
 
 	"settings":                   "Settings",
