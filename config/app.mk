@@ -34,7 +34,7 @@ COPY_DIRS := $(APP_DIR)/img $(APP_DIR)/languages $(APP_DIR)/demo
 COPY_FILE_TYPES = %.png %.json %.html %.js %.css
 COPY_FILE_TYPES_WILDCARD := $(subst %,*,$(COPY_FILE_TYPES))
 
-COPY_FILES := $(APP_DIR)/index.html
+COPY_FILES := $(APP_DIR)/index.html $(APP_DIR)/.nojekyll
 COPY_FILES += $(foreach d,$(COPY_DIRS),\
                           $(call rwildcards,$d/,$(COPY_FILE_TYPES_WILDCARD)))
 
