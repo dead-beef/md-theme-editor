@@ -1,7 +1,7 @@
 app.controller('ExportDataDialogController', [
-	'$mdDialog', '$mdToast', '$translate',
+	'$rootScope', '$mdDialog', '$mdToast', '$translate',
 	'themeService', 'themeExportService', 'EXPORT_FORMATS',
-	function($mdDialog, $mdToast, $translate,
+	function($rootScope, $mdDialog, $mdToast, $translate,
 	         themeService, exportService, EXPORT_FORMATS) {
 		var self = this;
 
@@ -13,7 +13,9 @@ app.controller('ExportDataDialogController', [
 		self.selected = self.selected | 0;
 
 		EXPORT_FORMATS.forEach(function(fmt) {
-			self[fmt] = exportService.exportTheme(fmt);
+			self[fmt] = exportService.exportTheme(
+				fmt, $rootScope.settings.exportUnusedPalettes
+			);
 		});
 
 		function toast(text) {

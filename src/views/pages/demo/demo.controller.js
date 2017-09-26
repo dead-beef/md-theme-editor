@@ -10,7 +10,9 @@ app.controller('DemoController', [
 			console.log('state change', $rootScope.stateName, format);
 			self.format = format;
 			self.args = '?theme=';
-			self.args += encodeURIComponent(exportService.exportTheme(format));
+			self.args += encodeURIComponent(exportService.exportTheme(
+				format, $rootScope.settings.exportUnusedPalettes
+			));
 			self.loading = true;
 			self.show = false;
 		});
