@@ -13,7 +13,7 @@ app.controller('ExportDataDialogController', [
 		self.selected = self.selected | 0;
 
 		EXPORT_FORMATS.forEach(function(fmt) {
-			self[fmt] = exportService[fmt]();
+			self[fmt] = exportService.exportTheme(fmt);
 		});
 
 		function toast(text) {

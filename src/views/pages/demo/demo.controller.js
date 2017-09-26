@@ -9,7 +9,8 @@ app.controller('DemoController', [
 			);
 			console.log('state change', $rootScope.stateName, format);
 			self.format = format;
-			self.args = '?theme=' + encodeURIComponent(exportService[format]());
+			self.args = '?theme=';
+			self.args += encodeURIComponent(exportService.exportTheme(format));
 			self.loading = true;
 			self.show = false;
 		});
