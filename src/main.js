@@ -58,7 +58,7 @@ APP_CONFIG.push(function(
 APP_RUN.push(function($rootScope, themeService) {
 	$rootScope.themeService = themeService;
 	$rootScope.settings = {
-		instantUpdate: true
+		instantColorUpdate: true
 	};
 });
 
