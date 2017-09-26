@@ -16,6 +16,7 @@
 	"settings.language":               "Language",
 	"settings.instant-color-update":   "Instant color update",
 	"settings.export-unused-palettes": "Export unused palettes",
+	"settings.default-color-picker":   "Use browser default color picker",
 
 	"palette.background":              "Background",
 	"palette.primary":                 "Primary",

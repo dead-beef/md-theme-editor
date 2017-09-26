@@ -14,13 +14,16 @@
 	</md-toolbar>
 	<div layout="column">
 		<input-color flex ng-model="ctrl.palette.base"
-		             ng-change="ctrl.reset()" instant-update="instantUpdate">
+		             ng-change="ctrl.reset()"
+		             instant-update="instantUpdate"
+		             default-color-picker="defaultColorPicker">
 			{{ 'color.base' | translate }}
 		</input-color>
 		<input-color flex ng-repeat="value in ::ctrl.COLOR_VALUES"
 		             ng-model="ctrl.palette[value].hex"
 		             ng-change="ctrl.update(value)"
-		             instant-update="instantUpdate">
+		             instant-update="instantUpdate"
+		             default-color-picker="defaultColorPicker">
 			{{ value }}
 		</input-color>
 	</div>

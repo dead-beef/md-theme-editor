@@ -12,47 +12,110 @@ app.directive('paletteSelect', function() {
 	};
 });
 
-app.directive('inputColor', [ 'paletteService', function(paletteService) {
-	return {
-		restrict: 'E',
-		replace: false,
-		transclude: true,
-		require: 'ngModel',
-		scope: {
-			ngModel: '=',
-			instantUpdate: '='
-		},
-		templateUrl: 'views/app/input-color.html',
-		link: function(scope, el, attr, ngModel) {
-			var input = el.find('input');
+app.directive('inputColor', [
+	'debounce', 'paletteService',
+	function(debounce, paletteService) {
+		return {
+			restrict: 'E',
+			replace: false,
+			transclude: true,
+			require: 'ngModel',
+			scope: {
+				ngModel: '=',
+				instantUpdate: '=',
+				defaultColorPicker: '='
+			},
+			templateUrl: 'views/app/input-color.html',
+			link: function(scope, el, attr, ngModel) {
+				var input = el.find('input');
 
-			var updateModel = function() {
-				scope.ngModel = scope.color;
-				ngModel.$setViewValue(scope.color);
-			};
+				var updateModel = function() {
+					scope.ngModel = scope.color;
+					ngModel.$setViewValue(scope.color);
+				};
 
-			input.on('change', function() {
-				scope.$apply(updateModel);
-			});
+				var setColor = function(color) {
+					scope.color = color;
+					scope.$apply(updateModel);
+				};
 
-			ngModel.$render = function() {
-				scope.color = tinycolor(ngModel.$viewValue).toHexString();
-				input.val(scope.color);
-			};
+				var spectrum = false;
 
-			scope.input = function() {
-				input.click();
-			};
+				var createSpectrum = function() {
+					if(!spectrum) {
+						spectrum = true;
+						el.spectrum({
+							color: tinycolor(scope.color),
+							showInput: false,
+							allowEmpty: false,
+							showAlpha: false,
+							clickoutFiresChange: false
+						});
+					}
+				};
 
-			scope.$watch('color', function(color) {
-				scope.contrast = paletteService.contrast(tinycolor(color)).css;
-				if(scope.instantUpdate) {
-					updateModel();
-				}
-			});
-		}
-	};
-}]);
+				var destroySpectrum = function() {
+					if(spectrum) {
+						spectrum = false;
+						el.spectrum('destroy');
+					}
+				};
+
+				ngModel.$render = function() {
+					scope.color = tinycolor(ngModel.$viewValue).toHexString();
+					input.val(scope.color);
+				};
+
+				scope.input = function() {
+					if(!spectrum) {
+						input.click();
+					}
+				};
+
+				input.on('change', function() {
+					scope.$apply(updateModel);
+				});
+
+				el
+					.on('move.spectrum', debounce(50, function(ev, color) {
+						scope.$apply(function() {
+							scope.color = color.toHexString();
+						});
+					}))
+					.on('change.spectrum', function(ev, color) {
+						if(color !== undefined) {
+							setColor(color.toHexString());
+						}
+					})
+					.on('hide.spectrum', function(/*ev*/) {
+						setColor(el.spectrum('get').toHexString());
+					});
+
+				scope.$watch('color', debounce(50, function(color) {
+					color = tinycolor(color);
+					scope.contrast = paletteService.contrast(color).css;
+					if(spectrum) {
+						el.spectrum('set', color);
+					}
+					if(scope.instantUpdate) {
+						updateModel();
+					}
+				}));
+
+				scope.$watch('defaultColorPicker', function(defaultColorPicker) {
+					if(defaultColorPicker) {
+						destroySpectrum();
+					}
+					else {
+						createSpectrum();
+					}
+				});
+
+				scope.$on('$destroy', destroySpectrum);
+			}
+		};
+	}
+]);
 
 app.directive('paletteEditor', [
 	function() {
@@ -63,7 +126,8 @@ app.directive('paletteEditor', [
 			//require: 'ngModel',
 			scope: {
 				name: '=',
-				instantUpdate: '='
+				instantUpdate: '=',
+				defaultColorPicker: '='
 			},
 			controller: 'PaletteEditorController',
 			controllerAs: 'ctrl',

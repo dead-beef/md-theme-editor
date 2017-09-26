@@ -59,7 +59,8 @@ APP_RUN.push(function($rootScope, themeService) {
 	$rootScope.themeService = themeService;
 	$rootScope.settings = {
 		instantColorUpdate: true,
-		exportUnusedPalettes: true
+		exportUnusedPalettes: true,
+		defaultColorPicker: true
 	};
 });
 

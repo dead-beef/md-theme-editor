@@ -13,11 +13,13 @@
 			'angular-aria',
 			'angular-combine',
 			'angular-clipboard',
+			'angular-debounce',
 			'angular-material',
 			'angular-translate',
 			'angular-translate-loader-static-files',
 			'angular-translate-storage-cookie',
-			'angular-translate-storage-local'
+			'angular-translate-storage-local',
+			'spectrum-colorpicker'
 		], factory);
 	}
 	else if(typeof module === 'object' && module.exports) {
@@ -32,11 +34,13 @@
 			require('angular-aria'),
 			require('angular-combine'),
 			require('angular-clipboard'),
+			require('angular-debounce'),
 			require('angular-material'),
 			require('angular-translate'),
 			require('angular-translate-loader-static-files'),
 			require('angular-translate-storage-cookie'),
-			require('angular-translate-storage-local')
+			require('angular-translate-storage-local'),
+			require('spectrum-colorpicker')
 		);
 	}
 	else {

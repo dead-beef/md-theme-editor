@@ -128,7 +128,7 @@ app.service('paletteService', [
 			var light = tinycolor('#fff');
 			var dark = this._dark(base);
 			var accent = tinycolor.mix(dark, base.tetrad()[3], 15);
-			var accent2 = accent.clone().saturate(100);
+			var accent2 = angular.copy(accent).saturate(100);
 			accent.saturate(80);
 
 			var lighten = function(x) { return tinycolor.mix(base, light, x); };
@@ -137,9 +137,9 @@ app.service('paletteService', [
 			return [
 				lighten(75), lighten(50), lighten(45), lighten(30), lighten(15),
 				base, darken(15), darken(30), darken(50), darken(75),
-				accent.clone().lighten(60),
+				angular.copy(accent).lighten(60),
 				accent.lighten(50),
-				accent2.clone().lighten(40),
+				angular.copy(accent2).lighten(40),
 				accent2.lighten(30)
 			];
 		};

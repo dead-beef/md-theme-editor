@@ -10,6 +10,7 @@ var APP_DEPS = [
 	'pascalprecht.translate',
 	'angular-clipboard',
 	'ui.router',
+	'rt.debounce',
 	APP_NAME + '.info',
 	APP_NAME + '.translate',
 	APP_NAME + '.stateData'
@@ -17,3 +18,5 @@ var APP_DEPS = [
 
 var TESTING = typeof jasmine !== 'undefined';
 /* eslint-enable no-unused-vars */
+
+$.fn.spectrum.load = false;
