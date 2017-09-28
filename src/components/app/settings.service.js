@@ -1,23 +1,37 @@
 app.service('settingsService', [
-	'$localStorage', 'themeService', 'paletteService',
+	'$rootScope', '$localStorage', 'themeService', 'paletteService',
 	function(
-		$localStorage,
+		$rootScope, $localStorage,
 		themeService, paletteService
 	) {
-		this.storage = $localStorage.$default({
+		var storage = this.storage = $localStorage.$default({
 			instantColorUpdate: true,
 			exportUnusedPalettes: true,
 			defaultColorPicker: true,
+			saveTheme: true,
 			theme: themeService.theme,
 			palettes: paletteService.custom
 		});
 
-		for(var palette in this.storage.palettes) {
-			paletteService.add(palette, this.storage.palettes[palette]);
+		if(storage.saveTheme) {
+			for(var palette in storage.palettes) {
+				paletteService.add(palette, storage.palettes[palette]);
+			}
+			angular.extend(themeService.theme, storage.theme);
 		}
-		angular.extend(themeService.theme, this.storage.theme);
 
-		this.storage.theme = themeService.theme;
-		this.storage.palettes = paletteService.custom;
+		$rootScope.$watch(
+			function() { return storage.saveTheme; },
+			function(saveTheme) {
+				if(saveTheme) {
+					storage.theme = themeService.theme;
+					storage.palettes = paletteService.custom;
+				}
+				else {
+					delete storage.theme;
+					delete storage.palettes;
+				}
+			}
+		);
 	}
 ]);
