@@ -7,7 +7,8 @@ var APP_CONFIG = [
 
 var APP_RUN = [
 	'$rootScope',
-	'themeService'
+	'themeService',
+	'settingsService'
 ];
 
 if(!TESTING) {
@@ -55,13 +56,9 @@ APP_CONFIG.push(function(
 	});
 });
 
-APP_RUN.push(function($rootScope, themeService) {
+APP_RUN.push(function($rootScope, themeService, settingsService) {
 	$rootScope.themeService = themeService;
-	$rootScope.settings = {
-		instantColorUpdate: true,
-		exportUnusedPalettes: true,
-		defaultColorPicker: true
-	};
+	$rootScope.settings = settingsService.storage;
 });
 
 // eslint-disable-next-line no-unused-vars
