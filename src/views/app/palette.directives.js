@@ -102,14 +102,17 @@ app.directive('inputColor', [
 					}
 				}));
 
-				scope.$watch('defaultColorPicker', function(defaultColorPicker) {
-					if(defaultColorPicker) {
-						destroySpectrum();
+				scope.$watch(
+					'defaultColorPicker',
+					function(defaultColorPicker) {
+						if(defaultColorPicker) {
+							destroySpectrum();
+						}
+						else {
+							createSpectrum();
+						}
 					}
-					else {
-						createSpectrum();
-					}
-				});
+				);
 
 				scope.$on('$destroy', destroySpectrum);
 			}
