@@ -26,6 +26,17 @@
 		}
 		theme = '$roboto-font-path: "../../fonts/roboto/";\n' + theme;
 
+		var palettes = theme.match(/\$custom-colors: \(\n([\s\S]*?)\n\);/m);
+		if(palettes) {
+			palettes = palettes[1].split('\n');
+			palettes.forEach(function(line, i) {
+				palettes[i] = line.replace(/^\s*"([^"]*)".*$/, '$1');
+			});
+		}
+		else {
+			palettes = [];
+		}
+
 		Sass.compile(theme, function(result) {
 			if(result.status) {
 				$('body')
@@ -50,6 +61,8 @@
 				'lime', 'yellow', 'amber', 'orange', 'deep-orange',
 				'brown', 'blue-grey', 'grey'
 			];
+
+			colors.push.apply(colors, palettes);
 
 			var values = [
 				'base',
