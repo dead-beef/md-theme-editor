@@ -3,7 +3,7 @@
 	"collapseBooleanAttributes": true,
 	"collapseInlineTagWhitespace": false,
 	"collapseWhitespace": true,
-	"conservativeCollapse": false,
+	"conservativeCollapse": true,
 	"customAttrCollapse": ".*",
 	"decodeEntities": true,
 	"html5": true,
@@ -36,6 +36,6 @@
 	"removeTagWhitespace": true,
 	"sortAttributes": true,
 	"sortClassName": true,
-	"trimCustomFragments": true,
+	"trimCustomFragments": false,
 	"useShortDoctype": true
 }
