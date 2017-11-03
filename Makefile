@@ -125,15 +125,18 @@ APP_MIN_CSS := $(APP_CSS:$(BUILD_DIR)%=$(MIN_DIR)%)
 APP_MIN_HTML := $(APP_HTML:$(BUILD_DIR)%=$(MIN_DIR)%)
 
 COPY_JS_FILES := $(filter %.js,$(COPY_FILES))
+COPY_JSON_FILES := $(filter %.json,$(COPY_FILES))
 COPY_CSS_FILES := $(filter %.css,$(COPY_FILES))
 COPY_HTML_FILES := $(filter %.html,$(COPY_FILES))
-COPY_FILES := $(filter-out %.js %.css %.html,$(COPY_FILES))
+COPY_FILES := $(filter-out %.js %.json %.css %.html,$(COPY_FILES))
 
 BUILD_COPY := $(COPY_FILES:$(APP_DIR)%=$(DIST_DIR)%)
 BUILD_COPY_JS := $(COPY_JS_FILES:$(APP_DIR)%=$(BUILD_DIR)%)
+BUILD_COPY_JSON := $(COPY_JSON_FILES:$(APP_DIR)%=$(BUILD_DIR)%)
 BUILD_COPY_CSS := $(COPY_CSS_FILES:$(APP_DIR)%=$(BUILD_DIR)%)
 BUILD_COPY_HTML := $(COPY_HTML_FILES:$(APP_DIR)%=$(BUILD_DIR)%)
-BUILD_COPY_DIST := $(BUILD_COPY_JS) $(BUILD_COPY_CSS) $(BUILD_COPY_HTML)
+BUILD_COPY_DIST := $(BUILD_COPY_JS) $(BUILD_COPY_JSON) \
+                   $(BUILD_COPY_CSS) $(BUILD_COPY_HTML)
 BUILD_COPY_DIST_MIN := $(BUILD_COPY_DIST:$(BUILD_DIR)%=$(MIN_DIR)%)
 BUILD_COPY_ALL := $(BUILD_FONTS) $(BUILD_COPY) $(BUILD_DEMO_COPY) $(BUILD_COPY_DIST)
 
@@ -322,6 +325,10 @@ $(MIN_DIR)/%.js: $(BUILD_DIR)/%.js | $(APP_OUT_DIRS)
 	$(call prefix,[min-js]   ,$(MINJS) $< -c -m >$@.tmp)
 	$(call prefix,[min-js]   ,$(MV) $@.tmp $@)
 
+$(MIN_DIR)/%.json: $(BUILD_DIR)/%.json | $(APP_OUT_DIRS)
+	$(call prefix,[min-json] ,$(MINJSON) $< >$@.tmp)
+	$(call prefix,[min-json] ,$(MV) $@.tmp $@)
+
 $(MIN_DIR)/%.html: $(BUILD_DIR)/%.html | $(APP_OUT_DIRS)
 	$(call prefix,[min-tmpl] ,$(MINHTML) $< -o $@.tmp)
 	$(call prefix,[min-tmpl] ,$(MV) $@.tmp $@)
@@ -408,7 +415,7 @@ $(eval $(call make-copy-target,$(BUILD_COPY_DIST),$(APP_DIR),$(BUILD_DIR)))
 #--------
 
 ifneq "$(MAKECMDGOALS)" "install"
-$(VARS_FILE): package.json config/make-vars.js config/main-files.js | $(BUILD_DIR) $(MAKE_VARS) node_modules
+$(VARS_FILE): package.json config/make-vars.js config/override.js | $(BUILD_DIR) $(MAKE_VARS) node_modules
 	$(call prefix,[vars]     ,$(MAKE_VARS_CMD) >$@.tmp)
 	$(call prefix,[vars]     ,$(MV) $@.tmp $@)
 endif
