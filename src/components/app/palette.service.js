@@ -12,7 +12,7 @@ app.service('paletteService', [
 		this.palettes = Object.keys($mdTheming.PALETTES);
 
 		this.validateName = function(name) {
-			if(!/[a-z][-a-z0-9_]*/.test(name)) {
+			if(!/^[a-z][-a-z0-9_]*$/.test(name)) {
 				return 1;
 			}
 			if($mdTheming.PALETTES[name]) {
@@ -39,7 +39,7 @@ app.service('paletteService', [
 		};
 
 		this.add = function(name, data, noEvent) {
-			if(!name) {
+			if(!name || this.validateName(name)) {
 				name = this.newName();
 			}
 			if(!data) {
