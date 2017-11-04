@@ -47,7 +47,7 @@ app.service('themeService', [
 		this.replacePalette = function(src, dst) {
 			THEME_PALETTES.forEach(function(palette) {
 				if(self.theme[palette] === src) {
-					self.theme[palette] = dst;
+					self.theme[palette] = dst || DEFAULT_THEME[palette];
 				}
 			});
 		};
@@ -59,7 +59,7 @@ app.service('themeService', [
 
 		$rootScope.$on(
 			'palette-remove',
-			function(ev, name) { self.replacePalette(name, 'grey'); }
+			function(ev, name) { self.replacePalette(name, null); }
 		);
 
 		$rootScope.$on(
