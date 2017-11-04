@@ -7,7 +7,7 @@ app.service('settingsService', [
 		var storage = this.storage = $localStorage.$default({
 			instantColorUpdate: true,
 			exportUnusedPalettes: true,
-			defaultColorPicker: true,
+			defaultColorPicker: false,
 			saveTheme: true,
 			theme: themeService.theme,
 			palettes: paletteService.custom
